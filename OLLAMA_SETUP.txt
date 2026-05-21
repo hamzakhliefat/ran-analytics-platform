@@ -1,0 +1,109 @@
+# Ollama Setup Guide for RAN KPI Platform
+
+## Quick Start: Installing Ollama
+
+### Step 1: Download and Install Ollama
+
+**Windows / Mac / Linux:**
+
+1. Visit [https://ollama.ai](https://ollama.ai)
+2. Download the installer for your OS
+3. Run the installer
+4. Ollama will start automatically
+
+### Step 2: Pull a Model
+
+Open terminal/command prompt and run:
+
+```bash
+# Recommended: Llama 2 (7B parameters, good balance)
+ollama pull llama2
+
+# Or choose another model:
+ollama pull mistral      # Faster, very capable
+ollama pull phi          # Lightweight (2.7B params)
+ollama pull codellama    # Optimized for code/technical content
+```
+
+**Model sizes:**
+- `llama2`: ~4GB download
+- `mistral`: ~4GB download  
+- `phi`: ~1.6GB download (fastest)
+- `codellama`: ~4GB download
+
+### Step 3: Verify Installation
+
+```bash
+# List installed models
+ollama list
+
+# Test the model
+ollama run llama2 "What is a handover in LTE networks?"
+```
+
+You should get a response about handovers!
+
+### Step 4: Run the Application
+
+```bash
+cd "c:\Users\hamza\RAN Analytics Platform"
+streamlit run app/Home.py
+```
+
+Navigate to **LLM Insights** page and start analyzing!
+
+---
+
+## Using Ollama in the App
+
+1. Go to **LLM Insights** page
+2. In the sidebar:
+   - ✅ Check "Use Ollama LLM"
+   - Select your preferred model
+3. Choose analysis mode:
+   - Dataset Summary
+   - Cell Analysis  
+   - Anomaly Explanation
+   - Optimization Suggestions
+
+---
+
+## Troubleshooting
+
+### "Ollama not available" error
+
+**Solution:**
+1. Make sure Ollama is installed and running
+2. Check Ollama is running: `ollama list`
+3. If not running, restart Ollama service
+
+**Windows:** Ollama runs as a background service  
+**Mac:** Check menu bar for Ollama icon  
+**Linux:** `systemctl status ollama`
+
+### Model not found
+
+**Solution:**
+Pull the model first:
+```bash
+ollama pull llama2
+```
+
+### Slow responses
+
+**Solutions:**
+1. Use smaller model (`phi` is fastest)
+2. Reduce response length in code
+3. Use GPU if available (Ollama auto-detects)
+
+### Out of memory
+
+**Solution:**
+Use a smaller model:
+```bash
+ollama pull phi  # Only 1.6GB, much faster
+```
+
+---
+
+**Happy Analyzing! **

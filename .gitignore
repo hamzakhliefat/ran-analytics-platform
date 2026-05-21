@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# IDEs and Editors
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# SQLite Databases & large data files
+*.sqlite
+*.sqlite3
+*.db
+db/ran_kpis.sqlite
+
+# Massive datasets (exceeding GitHub limit of 100MB)
+data/processed/clean_kpis.csv
+data/raw/Data Set Ajloun 2025.csv
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store
