@@ -5,11 +5,17 @@ Created on Mon Jan 19 11:20:11 2026
 @author: hamza khlefat
 """
 
+import os
 import sqlite3
 from typing import Optional, Tuple
 import pandas as pd
 
 def conn(path: str) -> sqlite3.Connection:
+    # If the full database is missing (e.g. on Streamlit Cloud), fallback to the sample database
+    if path == "db/ran_kpis.sqlite" and not os.path.exists(path):
+        sample_path = "db/ran_kpis_sample.sqlite"
+        if os.path.exists(sample_path):
+            path = sample_path
     return sqlite3.connect(path)
 
 def append_sqlite(df: pd.DataFrame, path: str, table: str) -> None:

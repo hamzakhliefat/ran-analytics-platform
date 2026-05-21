@@ -24,6 +24,7 @@ build/
 *.sqlite3
 *.db
 db/ran_kpis.sqlite
+!db/ran_kpis_sample.sqlite
 
 # Massive datasets (exceeding GitHub limit of 100MB)
 data/processed/clean_kpis.csv
