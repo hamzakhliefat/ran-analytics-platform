@@ -8,6 +8,23 @@ Created on Thu Jan 22 15:00:00 2026
 import os
 import sys
 
+# Mock torchvision to prevent Streamlit watcher/transformers lazy import crashes on Streamlit Cloud
+class DummyModule(object):
+    def __init__(self, name):
+        self.__name__ = name
+    def __getattr__(self, name):
+        if name in ('__path__', '__file__', '__spec__'):
+            raise AttributeError(name)
+        return DummyModule(f"{self.__name__}.{name}")
+    def __call__(self, *args, **kwargs):
+        return DummyModule("dummy")
+    def __repr__(self):
+        return f"<DummyModule {self.__name__}>"
+
+for m in ('torchvision', 'torchvision.transforms', 'torchvision.transforms.v2', 
+          'torchvision.transforms.v2.functional', 'torchvision.ops', 'torchvision.ops.boxes'):
+    sys.modules[m] = DummyModule(m)
+
 # Configure environment for legacy Keras support to maintain compatibility with diagnostic libraries.
 os.environ["TF_USE_LEGACY_KERAS"] = "1"
 

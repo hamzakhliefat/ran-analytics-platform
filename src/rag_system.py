@@ -1,6 +1,26 @@
 # -*- coding: utf-8 -*-
 from __future__ import annotations
 
+import sys
+
+# Mock torchvision to prevent Streamlit watcher/transformers lazy import crashes on Streamlit Cloud
+class DummyModule(object):
+    def __init__(self, name):
+        self.__name__ = name
+    def __getattr__(self, name):
+        if name in ('__path__', '__file__', '__spec__'):
+            raise AttributeError(name)
+        return DummyModule(f"{self.__name__}.{name}")
+    def __call__(self, *args, **kwargs):
+        return DummyModule("dummy")
+    def __repr__(self):
+        return f"<DummyModule {self.__name__}>"
+
+for m in ('torchvision', 'torchvision.transforms', 'torchvision.transforms.v2', 
+          'torchvision.transforms.v2.functional', 'torchvision.ops', 'torchvision.ops.boxes'):
+    if m not in sys.modules:
+        sys.modules[m] = DummyModule(m)
+
 """
 Created on Sat Jan 24 14:55:22 2026
 
