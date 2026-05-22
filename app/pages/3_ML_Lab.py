@@ -72,7 +72,7 @@ st.markdown("""
 # ============================================================================
 st.sidebar.header("Operational Configuration")
 
-train_n = st.sidebar.slider("Training Sample Volume", 10_000, 1500_000, 30_000, 10_000)
+train_n = st.sidebar.slider("Training Sample Volume", 1_000, 1500_000, 1_000, 1_000)
 st.sidebar.caption("Recommendation: Lower volume reduces memory overhead and processing time.")
 test_size_pct = st.sidebar.slider("Test Set Allocation (%)", 10, 40, 20, 5)
 test_size = test_size_pct / 100
